@@ -1,0 +1,13 @@
+#! /bin/bash -x
+
+PROJECT=$1
+MBED_TOOLS_DIR=/home/mbed/mbed_tools/workspace_tools
+TARGET=MTS_MDOT_F411RE 
+TOOLCHAIN=GCC_ARM
+SRCDIR=/home/mbed/mbed_project/$PROJECT
+BUILDDIR=/home/mbed/mbed_project/build/$PROJECT
+OPTS=$2
+
+python $MBED_TOOLS_DIR/make.py $OPTS -m $TARGET -t $TOOLCHAIN -c -j 0 --rtos --source=$SRCDIR --build=$BUILDDIR -o debug-info
+
+cp $BUILDDIR/$PROJECT.bin ~/build/
